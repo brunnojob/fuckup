@@ -26,7 +26,7 @@ async function payload(currentUserId: string) {
   const profiles = await prisma.user.findMany({ where: { AND: [{ id: { not: currentUserId } }, { id: { notIn: unavailableProfileIds } }] }, include: { followers: { select: { followerId: true } } }, orderBy: { createdAt: 'desc' }, take: 25 });
   const followerCounts = await prisma.discoveryProfileInteraction.groupBy({ by: ['targetId'], where: { action: 'FOLLOW' }, _count: { actorId: true }, orderBy: { _count: { actorId: 'desc' } }, take: 10 });
   const followingCounts = await prisma.discoveryProfileInteraction.groupBy({ by: ['actorId'], where: { action: 'FOLLOW' }, _count: { targetId: true }, orderBy: { _count: { targetId: 'desc' } }, take: 10 });
-  const leaderboardIds = [...new Set([...followerCounts.map(item => item.followingId), ...followingCounts.map(item => item.followerId)])];
+  const leaderboardIds = [...new Set([...followerCounts.map(item => item.targetId), ...followingCounts.map(item => item.actorId)])];
   const users = await prisma.user.findMany({ where: { id: { in: leaderboardIds } } });
   const userMap = new Map(users.map(user => [user.id, user]));
   return {

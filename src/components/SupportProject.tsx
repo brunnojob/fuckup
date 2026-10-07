@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { checkRepoStarred, starRepo, checkUserFollowed, followUser } from '../utils/github';
+import { starRepo, followUser } from '../utils/github';
 import { SUPPORT_REPOSITORY, MAINTAINER_PROFILE } from '../config';
 import { checkUserStatus } from '../utils/api';
 import { Star, UserPlus, CheckCircle2, Loader2, ChevronRight } from 'lucide-react';
@@ -22,13 +22,16 @@ export function SupportProject({ token, onComplete }: SupportProjectProps) {
 
   useEffect(() => {
     let mounted = true;
-    let pollInterval: any;
+    let pollInterval: ReturnType<typeof setInterval>;
+    let requestInFlight = false;
 
     async function checkStatus() {
-      if (!mounted) return;
+      if (!mounted || requestInFlight) return;
+      requestInFlight = true;
       try {
         const status = await checkUserStatus(token);
         if (mounted) {
+          setError('');
           setIsStarred(status.repositoryStarred);
           setIsFollowed(status.maintainerFollowed);
           if (status.requirementsComplete) {
@@ -41,6 +44,8 @@ export function SupportProject({ token, onComplete }: SupportProjectProps) {
           setError('Failed to verify GitHub status. ' + err.message);
           setChecking(false);
         }
+      } finally {
+        requestInFlight = false;
       }
     }
     
