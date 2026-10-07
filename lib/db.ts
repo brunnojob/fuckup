@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { getDatabaseUrl } from '../lib/database-config.js';
+import { getDatabaseUrl } from './database-config.js';
 
 let prisma: PrismaClient;
 

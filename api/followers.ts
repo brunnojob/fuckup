@@ -1,6 +1,6 @@
-import prisma from './db.js';
+import prisma from '../lib/db.js';
 import { Prisma } from '@prisma/client';
-import type { ApiRequest, ApiResponse } from './types.js';
+import type { ApiRequest, ApiResponse } from '../lib/api-types.js';
 
 const MAX_FOLLOWS_PER_DAY = 10;
 

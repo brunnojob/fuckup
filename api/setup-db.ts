@@ -8,8 +8,8 @@
  * 4. Delete this file after successful setup
  */
 
-import prisma from './db.js';
-import type { ApiRequest, ApiResponse } from './types.js';
+import prisma from '../lib/db.js';
+import type { ApiRequest, ApiResponse } from '../lib/api-types.js';
 
 export default async function handler(
   req: ApiRequest,
