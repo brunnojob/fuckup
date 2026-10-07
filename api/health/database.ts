@@ -1,6 +1,6 @@
-import prisma from '../db.js';
+import prisma from '../../lib/db.js';
 import { getDatabaseUrl } from '../../lib/database-config.js';
-import type { ApiRequest, ApiResponse } from '../types.js';
+import type { ApiRequest, ApiResponse } from '../../lib/api-types.js';
 
 // Read-only probe: verifies the connection and the User table without returning user data.
 export default async function handler(req: ApiRequest, res: ApiResponse) {
