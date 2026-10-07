@@ -63,3 +63,17 @@ After running the command, you should see:
    - "Features" page (returning users with requirements complete)
 
 If you still see "Failed to verify GitHub status", the database setup may have failed. Check the Vercel function logs at: https://vercel.com/dashboard → Your Project → Functions
+# Conectar o banco ao projeto `fuckup` na Vercel
+
+O login OAuth usa `GITHUB_CLIENT_ID` e `GITHUB_CLIENT_SECRET`. Essas variáveis não configuram o PostgreSQL.
+
+1. Abra o projeto `fuckup` na Vercel e selecione **Storage**.
+2. Conecte o banco PostgreSQL existente ao projeto. Se usar Supabase, selecione a integração existente e vincule o recurso correto ao projeto.
+3. Confirme em **Environment Variables** que há uma URL PostgreSQL para **Production**. O backend aceita `DATABASE_URL`, `POSTGRES_PRISMA_URL` ou `POSTGRES_URL`, nessa ordem. Para os comandos Prisma, configure `DATABASE_URL`.
+4. Se a integração não adicionar a conexão, obtenha a URI PostgreSQL no painel do provedor e salve-a como `DATABASE_URL` na Vercel. A URL HTTPS da API Supabase e a chave pública Supabase não substituem a URI PostgreSQL.
+5. Faça um novo deploy depois de vincular o banco ou alterar as variáveis.
+6. Acesse `/api/health/database`: `ready` confirma a conexão e a tabela `User`; `not_configured` indica ausência da URL; `unavailable` indica falha de conexão ou schema.
+
+Se faltarem tabelas, aplique o schema revisado com `npx prisma db push --skip-generate` em um ambiente autorizado com `DATABASE_URL` configurada. Não use `--accept-data-loss`. O build não modifica o banco automaticamente.
+
+Nunca envie a URI ou a senha do banco em mensagens, prints ou commits.
