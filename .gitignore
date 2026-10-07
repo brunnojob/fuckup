@@ -1,0 +1,22 @@
+# Logs
+logs
+*.log
+
+# Dependencies
+node_modules
+
+# Build
+dist
+dist-ssr
+
+# Env
+.env
+.env.*
+.vercel
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+node_modules
+.env*

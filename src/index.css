@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background-hsl: 220 32% 8%;
+  --card-background: 220 28% 12%;
+  --accent-purple: 154 100% 50%;
+  --accent-blue: 187 100% 56%;
+  --accent-red: 4 100% 64%;
+  --accent-green: 72 100% 58%;
+  --text-primary: 56 100% 93%;
+  --text-secondary: 185 20% 70%;
+  --glass-border: 187 100% 56% / 0.35;
+  --glass-bg: 220 28% 12% / 0.92;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: hsl(var(--background-hsl));
+  background-image: linear-gradient(rgba(24, 240, 196, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(24, 240, 196, .045) 1px, transparent 1px), linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .45));
+  background-size: 24px 24px, 24px 24px, 100% 100%;
+  color: hsl(var(--text-primary));
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+  background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.018) 3px 4px);
+}
+
+h1, h2, h3, button, label, select, input {
+  font-family: 'Press Start 2P', monospace;
+}
+
+h2 { text-shadow: 4px 4px 0 #102e3a; }
+
+button, a, [role='button'] { image-rendering: pixelated; }
+button { border-radius: 0 !important; }
+input, select { border-radius: 0 !important; outline-color: #9dff38; }
+input:focus, select:focus { box-shadow: 4px 4px 0 rgba(157, 255, 56, .35); }
+
+/* Convert the existing panels into crisp, game-like HUD windows. */
+.glass-card {
+  @apply bg-black/70 border-2 border-cyan-400/30 shadow-none transition-none;
+  border-radius: 0 !important;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, .48), inset 0 0 0 2px rgba(255,255,255,.025);
+}
+
+.glass-card::before {
+  content: '';
+  display: block;
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(157, 255, 56, .08);
+  pointer-events: none;
+}
+
+.premium-gradient-purple, .premium-gradient-green, .premium-gradient-red {
+  background-image: linear-gradient(90deg, #12d6a0, #9dff38) !important;
+  color: #071014 !important;
+  border: 2px solid #d9ff9e !important;
+  box-shadow: 4px 4px 0 #061115 !important;
+}
+
+.premium-gradient-red { background-image: linear-gradient(90deg, #ff6b4a, #ffb02e) !important; }
+.premium-gradient-green { background-image: linear-gradient(90deg, #9dff38, #12d6a0) !important; }
+.btn-hover-effect:hover, button:hover { transform: translate(-2px, -2px); filter: brightness(1.12); }
+.btn-hover-effect:active, button:active { transform: translate(2px, 2px); box-shadow: none !important; }
+.rounded-full { border-radius: 0 !important; }
+.rounded-2xl, .rounded-3xl, .rounded-xl, .rounded-lg { border-radius: 0 !important; }
+
+.staggered-list > * { animation: slideUp .35s steps(4, end) forwards; }
+
+.app-shell, .app-shell * {
+  font-family: 'VT323', monospace;
+  letter-spacing: 0;
+}
+
+.app-shell h1, .app-shell h2, .app-shell h3,
+.app-shell button, .app-shell label, .app-shell select, .app-shell input {
+  font-family: 'Press Start 2P', monospace;
+}
+
+.welcome-title {
+  font-size: clamp(1rem, 5.8vw, 4.5rem);
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+  max-width: 100%;
+}
+
+.welcome-eyebrow {
+  font-family: 'VT323', monospace !important;
+  font-size: clamp(1.2rem, 2.8vw, 2rem);
+  line-height: 1.25;
+}
+
+.welcome-quote {
+  font-family: 'VT323', monospace !important;
+  font-size: clamp(1.35rem, 2.6vw, 2rem);
+}
+
+.floating-githubs {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.floating-github {
+  position: absolute;
+  top: 0;
+  color: #35ff9a;
+  opacity: .12;
+  filter: drop-shadow(0 0 12px rgba(53, 255, 154, .65));
+  animation: drop-github 3.5s linear infinite;
+}
+
+@keyframes drop-github {
+  0% { transform: translateY(-18vh); opacity: 0; }
+  12% { opacity: .12; }
+  88% { opacity: .12; }
+  100% { transform: translateY(118vh); opacity: 0; }
+}
+
+.repo-menu {
+  min-height: 300px;
+  max-height: min(70vh, 680px);
+}
+
+.repo-list {
+  min-height: 220px;
+  max-height: min(62vh, 560px);
+}
+
+.repo-list > div {
+  min-height: 56px;
+}
+
+.badge-reference {
+  width: min(100%, 280px);
+  height: 150px;
+  object-fit: contain;
+  object-position: center;
+  image-rendering: pixelated;
+  opacity: .92;
+  background: rgba(0, 0, 0, .42);
+  border: 2px solid rgba(18, 214, 160, .4);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, .45);
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .welcome-title { font-size: clamp(.72rem, 5.8vw, 1.8rem); }
+  .repo-menu { left: -1rem; right: -1rem; }
+  .repo-list { max-height: 58vh; }
+  .floating-github { opacity: .08; }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-gray-900/65 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl transition-all duration-300;
+  }
+  
+  .premium-gradient-purple {
+    @apply bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-600;
+  }
+  
+  .premium-gradient-red {
+    @apply bg-gradient-to-br from-red-500 via-orange-500 to-rose-600;
+  }
+  
+  .premium-gradient-green {
+    @apply bg-gradient-to-br from-green-500 via-teal-500 to-emerald-600;
+  }
+  
+  .btn-hover-effect {
+    @apply hover:scale-[1.02] active:scale-[0.98] transition-all duration-200;
+  }
+
+  .floating-animation {
+    animation: floating 3s ease-in-out infinite;
+  }
+
+  @keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  .staggered-list > * {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: slideUp 0.4s ease forwards;
+  }
+
+  @keyframes slideUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #081218;
+}
+::-webkit-scrollbar-thumb {
+  background: #12d6a0;
+  border: 3px solid #081218;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9dff38;
+}
