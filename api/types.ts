@@ -6,6 +6,7 @@ export interface ApiRequest {
 }
 
 export interface ApiResponse<T = unknown> {
+  setHeader?(name: string, value: string): unknown;
   status(code: number): ApiResponse<T>;
   json(body: T): ApiResponse<T>;
 }

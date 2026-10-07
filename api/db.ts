@@ -1,8 +1,9 @@
 import { PrismaClient } from '@prisma/client';
+import { getDatabaseUrl } from '../lib/database-config.js';
 
 let prisma: PrismaClient;
 
-const databaseUrl = process.env.DATABASE_URL || process.env.POSTGRES_PRISMA_URL || process.env.POSTGRES_URL;
+const databaseUrl = getDatabaseUrl();
 const prismaOptions = databaseUrl ? { datasources: { db: { url: databaseUrl } } } : undefined;
 
 if (process.env.NODE_ENV === 'production') {

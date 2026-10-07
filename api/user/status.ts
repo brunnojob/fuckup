@@ -1,5 +1,6 @@
 import prisma from '../db.js';
 import type { ApiRequest, ApiResponse } from '../types.js';
+import { getDatabaseUrl } from '../../lib/database-config.js';
 
 interface UserStatusResponse {
   isNew: boolean;
@@ -53,6 +54,11 @@ export default async function handler(
     return res.status(401).json({ error: 'Invalid token format' });
   }
 
+  res.setHeader?.('Cache-Control', 'no-store');
+  if (!getDatabaseUrl()) {
+    return res.status(503).json({ error: 'Account verification is temporarily unavailable. Please try again later.' });
+  }
+
   try {
     // Fetch current GitHub user
     const userRes = await fetch('https://api.github.com/user', {
@@ -60,8 +66,7 @@ export default async function handler(
     });
 
     if (!userRes.ok) {
-      const errorText = await userRes.text().catch(() => '');
-      return res.status(401).json({ error: `Invalid GitHub token. GitHub API responded with ${userRes.status}. ${errorText}` });
+      return res.status(401).json({ error: 'Your GitHub session could not be verified. Please sign in again.' });
     }
 
     const githubUser = await userRes.json();
@@ -130,6 +135,6 @@ export default async function handler(
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     console.error('User status error:', errorMessage, error);
-    return res.status(500).json({ error: `Failed to check user status: ${errorMessage}` });
+    return res.status(503).json({ error: 'Account verification is temporarily unavailable. Please try again later.' });
   }
 }
