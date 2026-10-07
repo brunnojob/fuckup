@@ -1,4 +1,4 @@
-# fuckup
+# fuckup - É UMA APLICAÇÃO PARA AUXILIAR E AUTOMATIZAR O USÚARIO A CONSEGUIR Achievements rápidos como:  Quickdraw, Pull Shark, YOLO, Pair Extraordinaire
 
 Aplicação React com Vite e APIs na Vercel, usando Prisma e PostgreSQL.
 
