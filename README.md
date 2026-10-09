@@ -1,10 +1,10 @@
 # Repository Insights
 
-Análise de repositórios públicos do GitHub com linguagens, contribuidores, commits, duração de issues e critérios observáveis de estrutura.
+Analysis of public GitHub repositories, including languages, contributors, commits, issue duration, and observable structural criteria.
 
-## Executar
+## Run
 
-Requisitos: React, TypeScript, Vercel Functions e Supabase.
+Requirements: React, TypeScript, Vercel Functions, and Supabase.
 
 ```sh
 npm ci
@@ -14,17 +14,21 @@ npm run build
 npm run dev
 ```
 
-## Funcionamento
+## Behavior
 
-Configure `SUPABASE_URL` e `SUPABASE_PUBLISHABLE_KEY`. O relatório é salvo em `bd_runs` sob a conta autenticada. Consultas observam até cem registros por coleção e dependem do limite público do GitHub. Critérios de raiz não comprovam qualidade de todo o código; não há promessa de aumentar seguidores ou estrelas.
+Set `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY`. Reports are stored in `bd_runs` under the authenticated account. Queries inspect up to 100 records per collection and are subject to GitHub's public rate limits. Root-level criteria do not establish the quality of all source code; the application does not promise follower or star increases.
 
-## Persistência de resultados
+## Result synchronization
 
-O arquivo de operações está em [vercel-home-telemetry-api.vercel.app](https://vercel-home-telemetry-api.vercel.app/laboratory.html?project=fuckup). As migrações Supabase estão no [repositório da API](https://github.com/brunnojob/vercel-home-telemetry-api/tree/main/supabase/migrations).
+The [operations archive](https://vercel-home-telemetry-api.vercel.app/laboratory.html?project=fuckup) stores execution results. Supabase migrations are in the [API repository](https://github.com/brunnojob/vercel-home-telemetry-api/tree/main/supabase/migrations).
 
 ```sh
-python cloud/sync.py enqueue resultado.json --project fuckup
+python cloud/sync.py enqueue result.json --project fuckup
 python cloud/sync.py sync
 ```
 
-Defina `BRUNNODEV_ACCESS_TOKEN` com sua sessão. A fila SQLite conserva os relatórios até confirmação do servidor; o mesmo conteúdo não gera registros duplicados. Tokens não são gravados no código.
+Set `BRUNNODEV_ACCESS_TOKEN` to your session token. The SQLite outbox retains reports until the server confirms persistence; identical content does not create duplicate records. Tokens are not stored in source code. To run the synchronization tests:
+
+```sh
+python -m unittest discover -s cloud
+```
