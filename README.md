@@ -25,3 +25,9 @@ Use the [shared operations archive client](https://github.com/brunnojob/vercel-h
 ## License
 
 Original source and documentation are MIT licensed; see [LICENSE](LICENSE). Third-party dependencies and media retain their respective terms. Maintained by [Brunno Dev](https://brunnodev.store).
+
+## Implementation update
+
+`netlify.toml` builds the Vite interface and bundles compatible API functions. The HTTP adapter preserves statuses and headers, rejects repeated query parameters, and bounds JSON request bodies. Run `node --test tests/netlify.test.mjs`. Set Supabase URL and publishable key in the deployment environment before deploying.
+
+Contribution trailer: `Co-authored-by: nyctophile <33561761+ineedfoundmyway@users.noreply.github.com>`.
