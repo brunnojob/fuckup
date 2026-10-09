@@ -1,13 +1,14 @@
 {
-  "name": "githubcrazy",
+  "name": "repository-insights",
   "private": true,
-  "version": "0.0.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "prisma generate && vite build",
+    "build": "vite build",
     "preview": "vite preview",
-    "postinstall": "prisma skills sync || exit 0"
+    "test": "node --test tests/insights.test.mjs",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "clsx": "2.1.1",
@@ -17,14 +18,11 @@
     "tailwind-merge": "3.4.0"
   },
   "devDependencies": {
-    "@prisma/client": "^5.18.0",
     "@tailwindcss/vite": "4.1.17",
     "@types/node": "^22.0.0",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
-    "@vercel/postgres": "^0.10.0",
     "@vitejs/plugin-react": "5.1.1",
-    "prisma": "^5.18.0",
     "tailwindcss": "4.1.17",
     "typescript": "5.9.3",
     "vite": "7.2.4"

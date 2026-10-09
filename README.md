@@ -1,35 +1,30 @@
-# fuckup - É UMA APLICAÇÃO PARA AUXILIAR E AUTOMATIZAR O USÚARIO A CONSEGUIR Achievements rápidos como:  Quickdraw, Pull Shark, YOLO, Pair Extraordinaire
+# Repository Insights
 
-Aplicação React com Vite e APIs na Vercel, usando Prisma e PostgreSQL.
+Análise de repositórios públicos do GitHub com linguagens, contribuidores, commits, duração de issues e critérios observáveis de estrutura.
 
-## Desenvolvimento
+## Executar
 
-```bash
+Requisitos: React, TypeScript, Vercel Functions e Supabase.
+
+```sh
 npm ci
-npx prisma generate
+npm test
+npm run typecheck
+npm run build
 npm run dev
 ```
 
-O servidor do Vite atende o frontend. As rotas de `api/` precisam do ambiente da Vercel para funcionar.
+## Funcionamento
 
-## Build
+Configure `SUPABASE_URL` e `SUPABASE_PUBLISHABLE_KEY`. O relatório é salvo em `bd_runs` sob a conta autenticada. Consultas observam até cem registros por coleção e dependem do limite público do GitHub. Critérios de raiz não comprovam qualidade de todo o código; não há promessa de aumentar seguidores ou estrelas.
 
-```bash
-npm run build
+## Persistência de resultados
+
+O arquivo de operações está em [vercel-home-telemetry-api.vercel.app](https://vercel-home-telemetry-api.vercel.app/laboratory.html?project=fuckup). As migrações Supabase estão no [repositório da API](https://github.com/brunnojob/vercel-home-telemetry-api/tree/main/supabase/migrations).
+
+```sh
+python cloud/sync.py enqueue resultado.json --project fuckup
+python cloud/sync.py sync
 ```
 
-O build gera o cliente Prisma e o frontend em `dist/`.
-
-## Deploy na Vercel
-
-- Framework: Vite.
-- Diretório raiz: raiz do repositório.
-- Comando de build: `npm run build`.
-- Diretório de saída: `dist`.
-- Backend: funções TypeScript em `api/`.
-
-Configure `DATABASE_URL` (ou `POSTGRES_PRISMA_URL` / `POSTGRES_URL` para o backend), `GITHUB_CLIENT_ID` e `GITHUB_CLIENT_SECRET` na Vercel. Se definir `GITHUB_REDIRECT_URI`, use a URL de produção seguida de `/api/auth/github/callback` e configure o mesmo callback no aplicativo OAuth do GitHub.
-
-Nunca inclua credenciais no repositório. Publicar o frontend não confirma que o banco e o OAuth estão configurados; valide o login e as operações do banco após o deploy.
-
-Veja [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) e [DATABASE_SETUP.md](./DATABASE_SETUP.md) para a configuração do banco. Execute alterações de schema separadamente do build, após revisar o banco de destino.
+Defina `BRUNNODEV_ACCESS_TOKEN` com sua sessão. A fila SQLite conserva os relatórios até confirmação do servidor; o mesmo conteúdo não gera registros duplicados. Tokens não são gravados no código.
