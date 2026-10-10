@@ -1,6 +1,6 @@
 $ bash -e -o pipefail -c npm ci
 
-added 89 packages, and audited 90 packages in 5s
+added 89 packages, and audited 90 packages in 4s
 
 14 packages are looking for funding
   run `npm fund` for details
@@ -24,7 +24,7 @@ $ bash -e -o pipefail -c npm test
 > repository-insights@2.0.0 test
 > node --test tests/insights.test.mjs
 
-✔ issue duration excludes pull requests and missing closures (1.325441ms)
+✔ issue duration excludes pull requests and missing closures (1.267572ms)
 ℹ tests 1
 ℹ suites 0
 ℹ pass 1
@@ -32,7 +32,7 @@ $ bash -e -o pipefail -c npm test
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 62.911701
+ℹ duration_ms 58.367228
 
 $ bash -e -o pipefail -c npm run typecheck
 
@@ -53,7 +53,7 @@ computing gzip size...
 [2mdist/[22m[32mindex.html                 [39m[1m[2m  0.55 kB[22m[1m[22m[2m │ gzip:  0.32 kB[22m
 [2mdist/[22m[2massets/[22m[35mindex-CIWB2JQ9.css  [39m[1m[2m  0.87 kB[22m[1m[22m[2m │ gzip:  0.48 kB[22m
 [2mdist/[22m[2massets/[22m[36mindex-eXMOSi-s.js   [39m[1m[2m197.77 kB[22m[1m[22m[2m │ gzip: 62.29 kB[22m
-[32m✓ built in 1.06s[39m
+[32m✓ built in 951ms[39m
 
 $ node .proof/demo.mjs
-{"repository":{"license":null},"coverage":{"issuesLimit":100,"contributorsLimit":100,"commitsLimit":100,"observedAt":"2026-10-10T02:35:52.954Z"},"metrics":{"openIssues":0,"sampledClosedIssues":2,"medianIssueDays":3,"sampledContributors":0,"sampledCommits":0,"rootFiles":1},"checks":{"readme":true,"license":false,"tests":false,"workflow":false,"contributing":false,"security":false},"languages":[{"name":"Java","bytes":1000},{"name":"C","bytes":100}],"contributors":[],"commits":[]}
+{"repository":{"license":null},"coverage":{"issuesLimit":100,"contributorsLimit":100,"commitsLimit":100,"observedAt":"2026-10-10T02:43:53.639Z"},"metrics":{"openIssues":0,"sampledClosedIssues":2,"medianIssueDays":3,"sampledContributors":0,"sampledCommits":0,"rootFiles":1},"checks":{"readme":true,"license":false,"tests":false,"workflow":false,"contributing":false,"security":false},"languages":[{"name":"Java","bytes":1000},{"name":"C","bytes":100}],"contributors":[],"commits":[]}
