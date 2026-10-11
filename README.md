@@ -1,5 +1,7 @@
 # Repository Insights
 
+[View execution evidence](https://brunnojob.github.io/devstart-lab/proofs/fuckup/)
+
 Analysis of public GitHub repositories, including languages, contributors, commits, issue duration, and observable structural criteria.
 
 ## Run
